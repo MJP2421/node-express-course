@@ -1,0 +1,8 @@
+const name = require('./04-name')      
+const sayHi = require('./05-utils')
+const rizz = require('./06-alternative-flavor')
+//console.log(name)
+//console.log(rizz)
+require('./07-mind-grenade')
+sayHi(name.Mia)
+sayHi(name.Jennifer)

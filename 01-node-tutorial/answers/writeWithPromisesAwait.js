@@ -2,7 +2,10 @@ const {writeFile, readFile } = require("fs").promises;
 
 async function writer() {
    try{
-    await writeFile('./temporary/temp.txt','Hello world/n This is my second line/n This is my third line' )
+    //await writeFile('./temporary/temp.txt','Hello world/n This is my second line/n This is my third line' )
+await writeFile("./temporary/temp.txt", "Hello world/n");
+await writeFile("./temporary/temp.txt", "This is my second line/n", { flag: "a" });
+await writeFile("./temporary/temp.txt", "This is my third line/n", { flag: "a" });
    }catch (err) {
     console.log(`This is an error:`, err);
     return

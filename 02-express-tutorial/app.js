@@ -34,8 +34,8 @@ app.get('/api/v1/query', (req,res) => {
     const filteredProduct = product.reduce((acc,product) => {
 
         if (
-            product.price > parseFloat(maxPice) || 0
-            (search && !product.name.incudes(search))||0
+            product.price > parseFloat(maxPice) || 
+            (search && !product.name.incudes(search))||
             (limit && acc.length === maxlimit)
         ) {
             return acc;

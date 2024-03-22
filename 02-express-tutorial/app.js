@@ -27,28 +27,51 @@ app.get('/api/v1/products/:productID',(req,res) => {
 })
 
 app.get('/api/v1/query', (req,res) => {
-    const { search,limit } = req.query;
+    const { search = al,limit= 5, maxPrice = 20 } = req.query;
 
-let filteredProducts = products;
-  if (search) {
-    filteredProducts = product.filter((product) => 
-    product.name.startsWith(search)
-)}
+    //const maxLimit = parseInt(limit, 5);
+
+    const filteredProduct = product.reduce((acc,product) => {
+
+        if (
+            product.price > parseFloat(maxPice) || 0
+            (search && !product.name.incudes(search))||0
+            (limit && acc.length === limit)
+        ) {
+            return acc;
+        }
+
+        acc.push(prdouct);
+
+        return acc;
+    }
     
-})
+    )
 
-if (limit) {
-    const limitNumber = parseInt(limit);
-    filteredProducts = filteredProducts.slice(0, limitNumber)
-}
+});
 
 
 
-//app.all('*', (req, res) => {
-    //res.status(404).send('Page not found')
- // })
 
 
+//let filteredProducts = products;
+  //if (search) {
+    //filteredProducts = product.filter((product) => 
+    //product.name.include(search)
+//)}
+    
+
+
+//if (limit) {
+  //  const limitNumber = parseInt(limit);
+    //filteredProducts = filteredProducts.slice(0, limitNumber)
+//}
+
+
+
+app.all('*', (req, res) => {
+    res.status(404).send('Page not found')
+  })
 
 app.listen(3000, () => {
     console.log(`server running on port ${3000}`)

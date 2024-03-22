@@ -27,16 +27,16 @@ app.get('/api/v1/products/:productID',(req,res) => {
 })
 
 app.get('/api/v1/query', (req,res) => {
-    const { search = al,limit= 5, maxPrice = 20 } = req.query;
+    const { search, maxlimit= 0, maxPrice = 0 } = req.query;
 
-    //const maxLimit = parseInt(limit, 5);
+    const maxLimit = parseInt(limit, 10);
 
     const filteredProduct = product.reduce((acc,product) => {
 
         if (
             product.price > parseFloat(maxPice) || 0
             (search && !product.name.incudes(search))||0
-            (limit && acc.length === limit)
+            (limit && acc.length === maxlimit)
         ) {
             return acc;
         }
@@ -44,9 +44,9 @@ app.get('/api/v1/query', (req,res) => {
         acc.push(prdouct);
 
         return acc;
-    }
+    }, []
     
-    )
+    );
 
 });
 

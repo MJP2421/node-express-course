@@ -35,22 +35,35 @@ function updatePerson(req, res) {
   }
 }
 
-function deletePerson(req, res) {
-  const id = parseInt(req.params.id);
-  const updatedPeople = people.filter((p) => p.id !== id);
-  console.log("updatedPeople ====> ", updatedPeople);
-  console.log("updatedPeople.length ====> ", updatedPeople.length);
-  console.log("people.length ====> ", people.length);
+function deletePerson (req, res) {
 
-  if (updatedPeople.length < people.length) {
+  const personIndex = people.findIndex(p => p.id === personId);
+
+if (personIndex < 0) {
+  return res.status(404).json({ message: "Person not found" });
+}
+
+people.splice(personIndex, 1);
+
+res.status(200).json({ message: "Person deleted successfully" });
+}
+
+//function deletePerson(req, res) {
+  //const id = parseInt(req.params.id);
+  //const updatedPeople = people.filter((p) => p.id !== id);
+  //console.log("updatedPeople ====> ", updatedPeople);
+  //console.log("updatedPeople.length ====> ", updatedPeople.length);
+  //console.log("people.length ====> ", people.length);
+
+  //if (updatedPeople.length < people.length) {
     // Person was deleted
     // people = updatedPeople; // Update the main people array
     // res.status(204).json({ people: updatedPeople, message: `Person with id ${id} deleted` })
-    res.status(204).send();
-  } else {
-    res.status(404).json({ message: "Person not found" });
-  }
-}
+    //res.status(204).send();
+  //} else {
+    //res.status(404).json({ message: "Person not found" });
+  //}
+//}
 
 module.exports = {
   addPerson,
